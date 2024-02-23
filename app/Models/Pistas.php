@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Pistas extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'deporte_id',
+        'numero',
+    ];
     public function deporte()
     {
         return $this->belongsTo(Deportes::class);

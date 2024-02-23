@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DeportesResource;
 use App\Models\Deportes;
 use App\Http\Requests\StoreDeportesRequest;
 use App\Http\Requests\UpdateDeportesRequest;
+use App\Http\Resources\DeportesCollection;
 
 class DeportesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): DeportesCollection
     {
-        //
+        $deportes = Deportes::all();
+        return new DeportesCollection($deportes);
     }
 
     /**
@@ -35,9 +38,9 @@ class DeportesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Deportes $deportes)
+    public function show(Deportes $deporte): DeportesResource
     {
-        //
+        return new DeportesResource($deporte);
     }
 
     /**

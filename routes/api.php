@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\DeportesController;
+use App\Http\Controllers\PistasController;
+use App\Models\Deportes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::group([
+    'prefix' => 'v1',
+    'namespace' => 'App\Http\Controllers',
+],  function () {
+    Route::apiResource('/deportes', DeportesController::class);
+    Route::apiResource('/pistas', PistasController::class);
 });
-// Route::get('/', function () {
-    
-// })

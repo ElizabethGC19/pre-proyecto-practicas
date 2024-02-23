@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Deportes extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nombre'
+    ];
     /**
      * Get the Pista that owns the Deportes
      *
