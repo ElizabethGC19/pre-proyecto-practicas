@@ -22,7 +22,7 @@ class StoreDeportesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' => 'required|string|unique:deportes',
         ];
     }
 }

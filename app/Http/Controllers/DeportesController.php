@@ -32,7 +32,7 @@ class DeportesController extends Controller
      */
     public function store(StoreDeportesRequest $request)
     {
-        //
+        return new StoreDeportesRequest(Deportes::create($request->all()));
     }
 
     /**
