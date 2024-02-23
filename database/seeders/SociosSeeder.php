@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Socios;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class SociosSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Socios::factory(33)->create();
     }
 }

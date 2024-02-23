@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Reservas;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class ReservasSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Reservas::factory(20)->create();
     }
 }

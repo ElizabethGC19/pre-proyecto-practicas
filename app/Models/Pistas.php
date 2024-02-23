@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Pistas extends Model
 {
     use HasFactory;
+    public function deporte()
+    {
+        return $this->belongsTo(Deportes::class);
+    }
+    public function reservas()
+    {
+        return $this->hasMany(Reservas::class);
+    }
 }

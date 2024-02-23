@@ -17,7 +17,8 @@ class SociosFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "nombre" => $this->faker->firstName(),
+            "edad" => $this->faker->numberBetween(18, 60),
         ];
     }
 }
