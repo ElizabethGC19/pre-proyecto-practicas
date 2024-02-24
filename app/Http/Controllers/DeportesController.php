@@ -7,16 +7,18 @@ use App\Models\Deportes;
 use App\Http\Requests\StoreDeportesRequest;
 use App\Http\Requests\UpdateDeportesRequest;
 use App\Http\Resources\DeportesCollection;
+use Illuminate\Http\JsonResponse;
 
 class DeportesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): DeportesCollection
+    public function index(): JsonResponse
     {
         $deportes = Deportes::all();
-        return new DeportesCollection($deportes);
+
+        return response()->json(new DeportesCollection($deportes), 200);
     }
 
     /**
@@ -30,17 +32,17 @@ class DeportesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDeportesRequest $request)
+    public function store(StoreDeportesRequest $request): JsonResponse
     {
-        return new StoreDeportesRequest(Deportes::create($request->all()));
+        return response()->json(new DeportesResource(Deportes::create($request->all())), 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Deportes $deporte): DeportesResource
+    public function show(Deportes $deporte): JsonResponse
     {
-        return new DeportesResource($deporte);
+        return response()->json(new DeportesResource($deporte), 200);
     }
 
     /**
@@ -54,16 +56,18 @@ class DeportesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDeportesRequest $request, Deportes $deportes)
+    public function update(UpdateDeportesRequest $request, Deportes $deporte)
     {
-        //
+        $deporte->update($request->all());
+        return response()->json(new DeportesResource($deporte), 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Deportes $deportes)
+    public function destroy(Deportes $deporte)
     {
-        //
+        $deporte->delete();
+        return response()->json(['message' => 'Request successful'], 200);
     }
 }
