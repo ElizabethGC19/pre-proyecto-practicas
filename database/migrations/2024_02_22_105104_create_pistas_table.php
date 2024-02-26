@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pistas', function (Blueprint $table) {
             $table->id();
-            $table->string('deporte_id');
+            $table->foreignId('deporte_id')->constrained('deportes');
             $table->integer('numero');
             $table->timestamps();
         });

@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\DeportesController;
 use App\Http\Controllers\PistasController;
-use App\Models\Deportes;
-use Illuminate\Http\Request;
+use App\Http\Controllers\ReservasController;
+use App\Http\Controllers\SociosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,14 +16,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 Route::group([
     'prefix' => 'v1',
     'namespace' => 'App\Http\Controllers',
-],  function () {
+], function () {
     Route::apiResource('/deportes', DeportesController::class);
     Route::apiResource('/pistas', PistasController::class);
+    Route::apiResource('/socios', SociosController::class);
+    Route::apiResource('/reservas', ReservasController::class);
 });

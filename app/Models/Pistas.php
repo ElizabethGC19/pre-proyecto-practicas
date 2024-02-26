@@ -14,7 +14,7 @@ class Pistas extends Model
     ];
     public function deporte()
     {
-        return $this->belongsTo(Deportes::class);
+        return $this->belongsTo(Deportes::class, 'deporte_id');
     }
     public function reservas()
     {

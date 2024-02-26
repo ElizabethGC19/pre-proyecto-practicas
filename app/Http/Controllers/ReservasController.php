@@ -2,20 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Socios;
 use App\Models\Reservas;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Http\Resources\ReservasResource;
+use App\Http\Resources\ReservasCollection;
 use App\Http\Requests\StoreReservasRequest;
 use App\Http\Requests\UpdateReservasRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Pistas;
 
 class ReservasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        //
+        $reservas = Reservas::paginate();
+
+        if ($request->query('fecha')) {
+            $reservas = Reservas::whereDate('fecha', $request->query('fecha'))->join('pistas', 'pistas.id', '=', 'reservas.pista_id')
+                ->join('socios', 'socios.id', '=', 'reservas.socio_id')
+                ->join('deportes', 'deportes.id', '=', 'pistas.deporte_id')
+                ->select(
+                    'reservas.id as id',
+                    'reservas.fecha as fecha',
+                    'reservas.hora as hora',
+                    'socios.nombre as socio_nombre',
+                    'socios.edad as socio_edad',
+                    'pistas.numero as pista_numero',
+                    'deportes.nombre as pista_deporte'
+                )
+                ->get();
+        }
+
+        return response()->json(new ReservasCollection($reservas), 200);
     }
 
     /**
@@ -29,74 +51,33 @@ class ReservasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(StoreReservasRequest $request)
-    // {
-    //     //
-    // }
-    public function store(Request $request)
+    public function store(StoreReservasRequest $request): JsonResponse
     {
-        // Validar la solicitud
-        $validator = Validator::make($request->all(), [
-            'socio_id' => 'required',
-            'pista_id' => 'required',
-            'fecha' => 'required|date',
-            'hora_inicio' => 'required|date_format:H:i',
-            'hora_fin' => 'required|date_format:H:i|after:hora_inicio',
-        ]);
+        $socioId = $request->input('socio_id');
+        $fecha = $request->input('fecha');
 
-        // Aplicar reglas de negocio adicionales
-        if ($validator->passes()) {
-            $socioId = $request->input('socio_id');
-            $fecha = $request->input('fecha');
-            $horaInicio = $request->input('hora_inicio');
+        $reservasRealizadas = Reservas::where('socio_id', $socioId)
+            ->whereDate('fecha', $fecha)
+            ->count();
 
-            // Verificar si el socio ya tiene 3 reservas para este día
-            $reservasHoy = Reservas::where('socio_id', $socioId)
-                ->whereDate('fecha', $fecha)
-                ->count();
-
-            if ($reservasHoy >= 3) {
-                return response()->json(['error' => 'El socio ya tiene 3 reservas para este día.'], 422);
-            }
-
-            // Verificar si el socio ya tiene una reserva para esta hora
-            $reservaExistente = Reservas::where('socio_id', $socioId)
-                ->where('fecha', $fecha)
-                ->where(function ($query) use ($horaInicio) {
-                    $query->where('hora_inicio', '<=', $horaInicio)
-                        ->where('hora_fin', '>', $horaInicio);
-                })
-                ->orWhere(function ($query) use ($horaInicio) {
-                    $query->where('hora_inicio', '<', $horaInicio)
-                        ->where('hora_fin', '>=', $horaInicio);
-                })
-                ->count();
-
-            if ($reservaExistente > 0) {
-                return response()->json(['error' => 'El socio ya tiene una reserva para esta hora.'], 422);
-            }
-        } else {
-            return response()->json(['error' => $validator->errors()->all()], 422);
+        if ($reservasRealizadas >= 3) {
+            return response()->json(['error' => 'Request failed, already 3 bookings confirmed for ' . $fecha . '.'], 400);
         }
-
-        // Si todas las validaciones pasan, crear la reserva
-        $reserva = Reservas::create($request->all());
-
-        return response()->json(['message' => 'Reserva creada con éxito.', 'reserva' => $reserva], 201);
+        return response()->json(new ReservasResource(Reservas::create($request->all())), 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Reservas $reservas)
+    public function show(Reservas $reserva): JsonResponse
     {
-        //
+        return response()->json(new ReservasResource($reserva), 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Reservas $reservas)
+    public function edit(Reservas $reserva)
     {
         //
     }
@@ -104,16 +85,35 @@ class ReservasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateReservasRequest $request, Reservas $reservas)
+    public function update(UpdateReservasRequest $request, Reservas $reserva): JsonResponse
     {
-        //
+        $socioId = $request->input('socio_id');
+        $fecha = $request->input('fecha');
+
+        $reservasDeHoy = Reservas::where('socio_id', $socioId)
+            ->whereDate('fecha', $fecha)
+            ->count();
+
+        if ($reservasDeHoy >= 3) {
+            return response()->json(['error' => 'Request failed, already 3 bookings confirmed for today.'], 400);
+        }
+        $reserva->update($request->all());
+        return response()->json(new ReservasResource($reserva), 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Reservas $reservas)
+    public function destroy(Reservas $reserva): JsonResponse
     {
-        //
+        if (Reservas::find($reserva->id)) {
+            $reserva->delete();
+            return response()->json([
+                'message' => 'Request successful',
+                'deleted' => $reserva
+            ], 200);
+            
+        }
+        return response()->json(['error' => 'Request failed, reserva not found.'], 404);
     }
 }

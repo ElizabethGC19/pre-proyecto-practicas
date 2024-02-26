@@ -16,6 +16,11 @@ class Reservas extends Model
     ];
     public function pista()
     {
-        return $this->belongsTo(Pistas::class);
+        return $this->belongsTo(Pistas::class, 'pista_id', 'id');
     }
+    public function socio()
+    {
+        return $this->belongsTo(Socios::class, 'socio_id', 'id');
+    }
+
 }

@@ -67,7 +67,13 @@ class DeportesController extends Controller
      */
     public function destroy(Deportes $deporte)
     {
-        $deporte->delete();
-        return response()->json(['message' => 'Request successful'], 200);
+        if (Deportes::find($deporte->id)) {
+            $deporte->delete();
+            return response()->json([
+                'message' => 'Request successful',
+                'deleted' => $deporte
+            ], 200);
+        }
+        return response()->json(['error' => 'Request failed, deporte not found.'], 404);
     }
 }

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->date('fecha');
             $table->time('hora');
-            $table->string('socio_id')->nullable();
-            $table->string('pista_id');
+            $table->foreignId('socio_id')->constrained('socios');
+            $table->foreignId('pista_id')->constrained('pistas');
             $table->timestamps();
         });
     }

@@ -22,7 +22,27 @@ class StoreReservasRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'fecha' => [
+                'required', 
+                'date', 
+                'date_format:Y-m-d'
+            ],
+            'hora' => [
+                'required',
+                'string', 
+                'date_format:H:i', 
+                'regex:/^(0[8-9]|1[0-9]|2[0-2]):00$/'
+            ],
+            'socio_id' => [
+                'required', 
+                'integer',
+                'exists:socios,id'
+            ],
+            'pista_id' => [
+                'required',
+                'integer',
+                'exists:pistas,id'
+            ],
         ];
     }
 }

@@ -22,7 +22,17 @@ class UpdatePistasRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'deporte_id' => [
+                'required', 
+                'integer', 
+                'exists:deportes,id', 
+                'unique:pistas,deporte_id'
+            ],
+            'numero' => [
+                'required',
+                'integer',
+                'unique:pistas,numero'
+            ],
         ];
     }
 }

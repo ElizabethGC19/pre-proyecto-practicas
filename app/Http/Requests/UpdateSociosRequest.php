@@ -22,7 +22,16 @@ class UpdateSociosRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' => [
+                'required', 
+                'string'
+            ],
+            'edad' => [
+                'required', 
+                'integer', 
+                'gte:18', 
+                'lte:60'
+            ],
         ];
     }
 }
