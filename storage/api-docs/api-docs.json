@@ -1,0 +1,617 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Polideportivo API",
+        "description": "Polideportivo API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/v1/deportes": {
+            "get": {
+                "tags": [
+                    "Deportes"
+                ],
+                "summary": "Get all the sports",
+                "description": "Returns all sports as a JSON response",
+                "operationId": "e6396d6bdb6f9e5ebabf74278eb321fa",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Deportes"
+                ],
+                "summary": "Create a new sport",
+                "description": "Create a new sport and return it as a JSON response",
+                "operationId": "b52e795f0b95da6deff0e43e3c78f06e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "hockey"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sport created successfully"
+                    }
+                }
+            }
+        },
+        "/api/v1/deportes/{deporte}": {
+            "get": {
+                "tags": [
+                    "Deportes"
+                ],
+                "summary": "Get a specific sport",
+                "description": "Returns a specific sport as a JSON response",
+                "operationId": "5a4a586714b611bc3abf5ea4b266f200",
+                "parameters": [
+                    {
+                        "name": "deporte",
+                        "in": "path",
+                        "description": "ID of the sport",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Deportes"
+                ],
+                "summary": "Update a specific sport",
+                "description": "Update a specific sport and return it as a JSON         response",
+                "operationId": "80a5aef3f64f7b76dd9ddc2c2e111aa0",
+                "parameters": [
+                    {
+                        "name": "deporte",
+                        "in": "path",
+                        "description": "ID of the sport",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "hockey"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sport updated successfully"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Deportes"
+                ],
+                "summary": "Delete a specific sport",
+                "description": "Delete a specific sport and return a JSON response",
+                "operationId": "49329e240bacf7a7936ea127af5f8bc7",
+                "parameters": [
+                    {
+                        "name": "deporte",
+                        "in": "path",
+                        "description": "ID of the sport",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sport deleted successfully"
+                    },
+                    "404": {
+                        "description": "Sport not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/pistas": {
+            "get": {
+                "tags": [
+                    "Pistas"
+                ],
+                "summary": "Get all the pistas",
+                "description": "Returns all pistas as a JSON response",
+                "operationId": "e23b8789a0a98f4e4d0afb2b6ffdaada",
+                "responses": {
+                    "200": {
+                        "description": "Request successful"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Pistas"
+                ],
+                "summary": "Create a new pista",
+                "description": "Create a new pista and return it as a JSON response",
+                "operationId": "5e96ca2523a1028b6a6c75a63c02cc0d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "deporte_id": {
+                                        "type": "integer",
+                                        "example": "6"
+                                    },
+                                    "numero": {
+                                        "type": "integer",
+                                        "example": "6"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Pista created successfully"
+                    }
+                }
+            }
+        },
+        "/api/v1/pistas/{pista}": {
+            "get": {
+                "tags": [
+                    "Pistas"
+                ],
+                "summary": "Get a specific pista",
+                "description": "Returns a specific sport as a JSON response",
+                "operationId": "7aa73699d447ee7c60d83aa704fbd661",
+                "parameters": [
+                    {
+                        "name": "pista",
+                        "in": "path",
+                        "description": "ID of the pista",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Pistas"
+                ],
+                "summary": "Update a specific pista",
+                "description": "Update a specific pista and return it as a JSON         response",
+                "operationId": "092d60d0ff7e8f601ad4898492baecef",
+                "parameters": [
+                    {
+                        "name": "pista",
+                        "in": "path",
+                        "description": "ID of the pista",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "deporte_id": {
+                                        "type": "integer",
+                                        "example": "6"
+                                    },
+                                    "numero": {
+                                        "type": "integer",
+                                        "example": "6"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pista updated successfully"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Pistas"
+                ],
+                "summary": "Delete a specific pista",
+                "description": "Delete a specific pista and return a JSON response",
+                "operationId": "77a4d52a9302621a451db67875c97384",
+                "parameters": [
+                    {
+                        "name": "pista",
+                        "in": "path",
+                        "description": "ID of the pista",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pista deleted successfully"
+                    },
+                    "404": {
+                        "description": "Pista not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/reservas": {
+            "get": {
+                "tags": [
+                    "Reservas"
+                ],
+                "summary": "Get list of reservas",
+                "description": "Get a paginated list of reservas or filter by date",
+                "operationId": "d2b7197ec965c02cd2465b071091aac8",
+                "parameters": [
+                    {
+                        "name": "fecha",
+                        "in": "query",
+                        "description": "Filter by date",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Reservas"
+                ],
+                "summary": "Create a new reserva",
+                "description": "Create a new reserva and return it as a JSON response",
+                "operationId": "657a1a2f27199007d3704f449aeaa44b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "fecha": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-03-22"
+                                    },
+                                    "hora": {
+                                        "type": "hour",
+                                        "example": "11:00"
+                                    },
+                                    "socio_id": {
+                                        "type": "integer",
+                                        "example": "22"
+                                    },
+                                    "pista_id": {
+                                        "type": "integer",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Reserva created successfully"
+                    }
+                }
+            }
+        },
+        "/api/v1/reservas/{reserva}": {
+            "get": {
+                "tags": [
+                    "Reservas"
+                ],
+                "summary": "Get a specific reserva",
+                "description": "Returns a specific reserva as a JSON response",
+                "operationId": "2f396daf3de4889fdeaa7b40663b8816",
+                "parameters": [
+                    {
+                        "name": "reserva",
+                        "in": "path",
+                        "description": "ID of the reserva",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Reservas"
+                ],
+                "summary": "Update a specific reserva",
+                "description": "Update a specific reserva and return it as a JSON response",
+                "operationId": "82026ac7aabffdb195bfaeca50634139",
+                "parameters": [
+                    {
+                        "name": "reserva",
+                        "in": "path",
+                        "description": "ID of the reserva",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "fecha": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-03-22"
+                                    },
+                                    "hora": {
+                                        "type": "hour",
+                                        "example": "11:00"
+                                    },
+                                    "socio_id": {
+                                        "type": "integer",
+                                        "example": "22"
+                                    },
+                                    "pista_id": {
+                                        "type": "integer",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Reserva updated successfully"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Reservas"
+                ],
+                "summary": "Delete a specific reserva",
+                "description": "Delete a specific reserva and return a JSON response",
+                "operationId": "d3d83e30f55d7bc26e74aec51562c78b",
+                "parameters": [
+                    {
+                        "name": "reserva",
+                        "in": "path",
+                        "description": "ID of the reserva",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reserva deleted successfully"
+                    },
+                    "404": {
+                        "description": "Reserva not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/socios": {
+            "get": {
+                "tags": [
+                    "Socios"
+                ],
+                "summary": "Get all the socios",
+                "description": "Returns all socios as a JSON response",
+                "operationId": "e8a7564caad4b9a8371d20d78f09d0a9",
+                "responses": {
+                    "200": {
+                        "description": "Request successful"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Socios"
+                ],
+                "summary": "Create a new socio",
+                "description": "Create a new socio and return it as a JSON response",
+                "operationId": "d7618ccb2a11d99e2f442daa882be950",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Fátima"
+                                    },
+                                    "edad": {
+                                        "type": "integer",
+                                        "example": "19"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Socio created successfully"
+                    }
+                }
+            }
+        },
+        "/api/v1/socios/{socio}": {
+            "get": {
+                "tags": [
+                    "Socios"
+                ],
+                "summary": "Get a specific socio",
+                "description": "Returns a specific socio as a JSON response",
+                "operationId": "ee02ec67fbb38a46c401bba14547a193",
+                "parameters": [
+                    {
+                        "name": "socio",
+                        "in": "path",
+                        "description": "ID of the socio",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Socios"
+                ],
+                "summary": "Update a specific socio",
+                "description": "Update a specific socio and return it as a JSON response",
+                "operationId": "21306eae77a11f3f96700c57b96f875e",
+                "parameters": [
+                    {
+                        "name": "socio",
+                        "in": "path",
+                        "description": "ID of the socio",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Fátima"
+                                    },
+                                    "edad": {
+                                        "type": "integer",
+                                        "example": "19"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Socio updated successfully"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Socios"
+                ],
+                "summary": "Delete a specific socio",
+                "description": "Delete a specific socio and return a JSON response",
+                "operationId": "09f6ad81f3df173cbf12542866e38116",
+                "parameters": [
+                    {
+                        "name": "socio",
+                        "in": "path",
+                        "description": "ID of the socio",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Socio deleted successfully"
+                    },
+                    "404": {
+                        "description": "Socio not found"
+                    }
+                }
+            }
+        }
+    }
+}

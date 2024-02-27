@@ -15,8 +15,27 @@ use App\Models\Pistas;
 class ReservasController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
+     * @OA\Get(
+     *     path="/api/v1/reservas",
+     *     tags={"Reservas"},
+     *     summary="Get list of reservas",
+     *     description="Get a paginated list of reservas or filter by date",
+     *     @OA\Parameter(
+     *         name="fecha",
+     *         in="query",
+     *         description="Filter by date",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *             format="date"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Request successful"
+     *     )
+     * )
+    */
     public function index(Request $request): JsonResponse
     {
         $reservas = Reservas::paginate();
@@ -49,8 +68,29 @@ class ReservasController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
+     * @OA\Post(
+     *     path="/api/v1/reservas",
+     *     tags={"Reservas"},
+     *     summary="Create a new reserva",
+     *     description="Create a new reserva and return it as a JSON response",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                  @OA\Property(property="fecha", type="date",  example="2024-03-22"),
+     *                  @OA\Property(property="hora", type="hour",  example="11:00"),
+     *                  @OA\Property(property="socio_id", type="integer",  example="22"),
+     *                  @OA\Property(property="pista_id", type="integer",  example="2")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Reserva created successfully",
+     *     )
+     * )
+    */
     public function store(StoreReservasRequest $request): JsonResponse
     {
         $socioId = $request->input('socio_id');
@@ -67,8 +107,26 @@ class ReservasController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
+     * @OA\Get(
+     *     path="/api/v1/reservas/{reserva}",
+     *     tags={"Reservas"},
+     *     summary="Get a specific reserva",
+     *     description="Returns a specific reserva as a JSON response",
+     *     @OA\Parameter(
+     *         name="reserva",
+     *         in="path",
+     *         description="ID of the reserva",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Request successful",
+     *     )
+     * )
+    */
     public function show(Reservas $reserva): JsonResponse
     {
         return response()->json(new ReservasResource($reserva), 200);
@@ -83,8 +141,38 @@ class ReservasController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     */
+     * @OA\Put(
+     *     path="/api/v1/reservas/{reserva}",
+     *     tags={"Reservas"},
+     *     summary="Update a specific reserva",
+     *     description="Update a specific reserva and return it as a JSON response",
+     *     @OA\Parameter(
+     *         name="reserva",
+     *         in="path",
+     *         description="ID of the reserva",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                  @OA\Property(property="fecha", type="date",  example="2024-03-22"),
+     *                  @OA\Property(property="hora", type="hour",  example="11:00"),
+     *                  @OA\Property(property="socio_id", type="integer",  example="22"),
+     *                  @OA\Property(property="pista_id", type="integer",  example="2")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Reserva updated successfully",
+     *     )
+     * )
+    */
     public function update(UpdateReservasRequest $request, Reservas $reserva): JsonResponse
     {
         $socioId = $request->input('socio_id');
@@ -102,8 +190,33 @@ class ReservasController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     */
+     * @OA\Delete(
+     *     path="/api/v1/reservas/{reserva}",
+     *     tags={"Reservas"},
+     *     summary="Delete a specific reserva",
+     *     description="Delete a specific reserva and return a JSON response",
+     *     @OA\Parameter(
+     *         name="reserva",
+     *         in="path",
+     *         description="ID of the reserva",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Reserva deleted successfully",
+     *             @OA\Property(property="message", type="string", example="Request successful"),
+     *             @OA\Property(property="deleted", ref="#/App/Models/Reservas")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Reserva not found",
+     *             @OA\Property(property="message", type="string", example="Error, reserva not found"),
+     *     ),
+     * )
+    */
     public function destroy(Reservas $reserva): JsonResponse
     {
         if (Reservas::find($reserva->id)) {
