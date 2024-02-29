@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Models\Socios;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSociosRequest;
 use App\Http\Requests\UpdateSociosRequest;
 use App\Http\Resources\SociosCollection;

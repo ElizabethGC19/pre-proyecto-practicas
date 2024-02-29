@@ -18,12 +18,17 @@
                 ],
                 "summary": "Get all the sports",
                 "description": "Returns all sports as a JSON response",
-                "operationId": "e6396d6bdb6f9e5ebabf74278eb321fa",
+                "operationId": "4c78774655c58577cc3c0790b58feb72",
                 "responses": {
                     "200": {
                         "description": "Successful operation"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -31,7 +36,7 @@
                 ],
                 "summary": "Create a new sport",
                 "description": "Create a new sport and return it as a JSON response",
-                "operationId": "b52e795f0b95da6deff0e43e3c78f06e",
+                "operationId": "66f53c4c21ffb2f568dfc0df04e10c94",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -52,7 +57,12 @@
                     "201": {
                         "description": "Sport created successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             }
         },
         "/api/v1/deportes/{deporte}": {
@@ -62,7 +72,7 @@
                 ],
                 "summary": "Get a specific sport",
                 "description": "Returns a specific sport as a JSON response",
-                "operationId": "5a4a586714b611bc3abf5ea4b266f200",
+                "operationId": "7cd0744afebf445410c22c8a4206c440",
                 "parameters": [
                     {
                         "name": "deporte",
@@ -78,7 +88,12 @@
                     "200": {
                         "description": "Successful operation"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -86,7 +101,7 @@
                 ],
                 "summary": "Update a specific sport",
                 "description": "Update a specific sport and return it as a JSON         response",
-                "operationId": "80a5aef3f64f7b76dd9ddc2c2e111aa0",
+                "operationId": "f401836f4ba6c3549c8c440f3b306ece",
                 "parameters": [
                     {
                         "name": "deporte",
@@ -126,7 +141,7 @@
                 ],
                 "summary": "Delete a specific sport",
                 "description": "Delete a specific sport and return a JSON response",
-                "operationId": "49329e240bacf7a7936ea127af5f8bc7",
+                "operationId": "b0caf54b3180de072aa84e6cf6f1c357",
                 "parameters": [
                     {
                         "name": "deporte",
@@ -155,7 +170,7 @@
                 ],
                 "summary": "Get all the pistas",
                 "description": "Returns all pistas as a JSON response",
-                "operationId": "e23b8789a0a98f4e4d0afb2b6ffdaada",
+                "operationId": "151736e5c2c8e07398d0fc0f52c95db6",
                 "responses": {
                     "200": {
                         "description": "Request successful"
@@ -168,7 +183,7 @@
                 ],
                 "summary": "Create a new pista",
                 "description": "Create a new pista and return it as a JSON response",
-                "operationId": "5e96ca2523a1028b6a6c75a63c02cc0d",
+                "operationId": "8bfd2adafb4655c22de2b0be4ccb6bbd",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -203,7 +218,7 @@
                 ],
                 "summary": "Get a specific pista",
                 "description": "Returns a specific sport as a JSON response",
-                "operationId": "7aa73699d447ee7c60d83aa704fbd661",
+                "operationId": "81c176dc4724cebfdd5333072ceb154e",
                 "parameters": [
                     {
                         "name": "pista",
@@ -227,7 +242,7 @@
                 ],
                 "summary": "Update a specific pista",
                 "description": "Update a specific pista and return it as a JSON         response",
-                "operationId": "092d60d0ff7e8f601ad4898492baecef",
+                "operationId": "ec03709679cca502585bf0356bdb739c",
                 "parameters": [
                     {
                         "name": "pista",
@@ -271,7 +286,7 @@
                 ],
                 "summary": "Delete a specific pista",
                 "description": "Delete a specific pista and return a JSON response",
-                "operationId": "77a4d52a9302621a451db67875c97384",
+                "operationId": "38b8ea38077edfcf01dca737b6fc6602",
                 "parameters": [
                     {
                         "name": "pista",
@@ -300,7 +315,7 @@
                 ],
                 "summary": "Get list of reservas",
                 "description": "Get a paginated list of reservas or filter by date",
-                "operationId": "d2b7197ec965c02cd2465b071091aac8",
+                "operationId": "f64e3c3e32fb3ceb4ef045bfda7f90bc",
                 "parameters": [
                     {
                         "name": "fecha",
@@ -325,7 +340,7 @@
                 ],
                 "summary": "Create a new reserva",
                 "description": "Create a new reserva and return it as a JSON response",
-                "operationId": "657a1a2f27199007d3704f449aeaa44b",
+                "operationId": "441c2d801167bb64c27408d6f5228906",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -369,7 +384,7 @@
                 ],
                 "summary": "Get a specific reserva",
                 "description": "Returns a specific reserva as a JSON response",
-                "operationId": "2f396daf3de4889fdeaa7b40663b8816",
+                "operationId": "1b004cad6adbb9ccd2edec464137f0df",
                 "parameters": [
                     {
                         "name": "reserva",
@@ -393,7 +408,7 @@
                 ],
                 "summary": "Update a specific reserva",
                 "description": "Update a specific reserva and return it as a JSON response",
-                "operationId": "82026ac7aabffdb195bfaeca50634139",
+                "operationId": "74295a99219de6b5ba2ea326597269b5",
                 "parameters": [
                     {
                         "name": "reserva",
@@ -446,7 +461,7 @@
                 ],
                 "summary": "Delete a specific reserva",
                 "description": "Delete a specific reserva and return a JSON response",
-                "operationId": "d3d83e30f55d7bc26e74aec51562c78b",
+                "operationId": "0a0c312556f59fcddd0dcce60e392772",
                 "parameters": [
                     {
                         "name": "reserva",
@@ -475,7 +490,7 @@
                 ],
                 "summary": "Get all the socios",
                 "description": "Returns all socios as a JSON response",
-                "operationId": "e8a7564caad4b9a8371d20d78f09d0a9",
+                "operationId": "6df39126d393a0a4421993707731932c",
                 "responses": {
                     "200": {
                         "description": "Request successful"
@@ -488,7 +503,7 @@
                 ],
                 "summary": "Create a new socio",
                 "description": "Create a new socio and return it as a JSON response",
-                "operationId": "d7618ccb2a11d99e2f442daa882be950",
+                "operationId": "00fb9ef6a0f178c53d02a37da07d41e3",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -523,7 +538,7 @@
                 ],
                 "summary": "Get a specific socio",
                 "description": "Returns a specific socio as a JSON response",
-                "operationId": "ee02ec67fbb38a46c401bba14547a193",
+                "operationId": "5009b2d16fe31f6100a3d786dc30dd39",
                 "parameters": [
                     {
                         "name": "socio",
@@ -547,7 +562,7 @@
                 ],
                 "summary": "Update a specific socio",
                 "description": "Update a specific socio and return it as a JSON response",
-                "operationId": "21306eae77a11f3f96700c57b96f875e",
+                "operationId": "58e674a5c137dd0a119eed1a237b57e4",
                 "parameters": [
                     {
                         "name": "socio",
@@ -591,7 +606,7 @@
                 ],
                 "summary": "Delete a specific socio",
                 "description": "Delete a specific socio and return a JSON response",
-                "operationId": "09f6ad81f3df173cbf12542866e38116",
+                "operationId": "9c3dda2c8f5ca6f339119b87849f6b1c",
                 "parameters": [
                     {
                         "name": "socio",
@@ -612,6 +627,167 @@
                     }
                 }
             }
+        },
+        "/api/v1/register": {
+            "post": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Register a new user",
+                "description": "Register a new user and return an access token",
+                "operationId": "b5e5cdd89c27497d47288c39cf2dd8c5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User registered successfully"
+                    },
+                    "401": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/v1/login": {
+            "post": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "User login",
+                "description": "Login with email and password and return an access token",
+                "operationId": "f854efad96f05200354af27e2598a134",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "accessToken"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Name or password incorrect."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/logout": {
+            "post": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "User logout",
+                "description": "Revoke the user's access token to logout",
+                "operationId": "f5ec7320c91d7e1b2b0d16d4e59967a5",
+                "responses": {
+                    "200": {
+                        "description": "Logout successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Logout successfully."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "passport": {
+                "type": "apiKey",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://localhost/oauth/authorize",
+                        "tokenUrl": "http://localhost/oauth/token",
+                        "refreshUrl": "http://localhost/token/refresh",
+                        "scopes": []
+                    }
+                }
+            },
+            "0": []
         }
     }
 }

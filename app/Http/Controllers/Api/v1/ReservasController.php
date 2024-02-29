@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
-use App\Models\Socios;
+use App\Http\Controllers\Controller;
 use App\Models\Reservas;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -10,7 +10,6 @@ use App\Http\Resources\ReservasResource;
 use App\Http\Resources\ReservasCollection;
 use App\Http\Requests\StoreReservasRequest;
 use App\Http\Requests\UpdateReservasRequest;
-use App\Models\Pistas;
 
 class ReservasController extends Controller
 {

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\DeportesResource;
 use App\Models\Deportes;
 use App\Http\Requests\StoreDeportesRequest;
@@ -9,17 +10,6 @@ use App\Http\Requests\UpdateDeportesRequest;
 use App\Http\Resources\DeportesCollection;
 use Illuminate\Http\JsonResponse;
 
-/**
- * @OA\Info(
- *     title="Polideportivo API",
- *     version="1.0.0",
- *     description="Polideportivo API"
-     
- )
- * @OA\Server(
- *     url="http://localhost:8000",    
- )
- */
 class DeportesController extends Controller
 {
     /**
@@ -27,6 +17,7 @@ class DeportesController extends Controller
      *     path="/api/v1/deportes",
      *     tags={"Deportes"},
      *     summary="Get all the sports",
+     *     security={{"BearerAuth": {}}},
      *     description="Returns all sports as a JSON response",
      *     @OA\Response(
      *         response=200,
@@ -54,6 +45,7 @@ class DeportesController extends Controller
      *     path="/api/v1/deportes",
      *     tags={"Deportes"},
      *     summary="Create a new sport",
+     *     security={{"BearerAuth": {}}},
      *     description="Create a new sport and return it as a JSON response",
      *     @OA\RequestBody(
      *         required=true,
@@ -80,6 +72,7 @@ class DeportesController extends Controller
      *     path="/api/v1/deportes/{deporte}",
      *     tags={"Deportes"},
      *     summary="Get a specific sport",
+     *     security={{"BearerAuth": {}}},
      *     description="Returns a specific sport as a JSON response",
      *     @OA\Parameter(
      *         name="deporte",

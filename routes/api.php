@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\DeportesController;
-use App\Http\Controllers\PistasController;
-use App\Http\Controllers\ReservasController;
-use App\Http\Controllers\SociosController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\v1\UserController;
+use App\Http\Controllers\Api\v1\PistasController;
+use App\Http\Controllers\Api\v1\SociosController;
+use App\Http\Controllers\Api\v1\DeportesController;
+use App\Http\Controllers\Api\v1\ReservasController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +20,21 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group([
     'prefix' => 'v1',
-    'namespace' => 'App\Http\Controllers',
+    'namespace' => 'App\Http\Controllers\Api\v1',
 ], function () {
-    Route::apiResource('/deportes', DeportesController::class);
-    Route::apiResource('/pistas', PistasController::class);
-    Route::apiResource('/socios', SociosController::class);
-    Route::apiResource('/reservas', ReservasController::class);
+    Route::post('/register', [UserController::class, 'register'])->name('register');
+    Route::post('/login', [UserController::class, 'login']);
+    Route::middleware('auth:api')->group(function () {
+        Route::apiResource('/deportes', DeportesController::class);
+        Route::apiResource('/pistas', PistasController::class);
+        Route::apiResource('/socios', SociosController::class);
+        Route::apiResource('/reservas', ReservasController::class);
+        Route::post('/logout', [UserController::class, 'logout']);
+    });
+});
+Route::group([
+    'prefix' => 'v2',
+    'namespace' => 'App\Http\Controllers\Api\v2',
+], function () {
+    Route::apiResource('/reservas', 'ReservasController');
 });

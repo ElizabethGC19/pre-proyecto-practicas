@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
+use App\Http\Controllers\Controller;
 use App\Models\Pistas;
 use App\Http\Requests\StorePistasRequest;
 use App\Http\Requests\UpdatePistasRequest;
